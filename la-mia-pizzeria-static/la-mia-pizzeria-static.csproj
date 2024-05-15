@@ -1,0 +1,37 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <RootNamespace>la_mia_pizzeria_static</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\img\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\img\bresaolaerucola.jpg" />
+    <None Include="wwwroot\img\bufalina.jpg" />
+    <None Include="wwwroot\img\calzone.jpg" />
+    <None Include="wwwroot\img\caprese.jpg" />
+    <None Include="wwwroot\img\capricciosa.jpg" />
+    <None Include="wwwroot\img\carbonara.jpg" />
+    <None Include="wwwroot\img\diavola.jpg" />
+    <None Include="wwwroot\img\fruttidimare.jpg" />
+    <None Include="wwwroot\img\margherita.jpg" />
+    <None Include="wwwroot\img\napoli.jpg" />
+    <None Include="wwwroot\img\patateerosmarino.jpg" />
+    <None Include="wwwroot\img\prosciuttoefunghi.jpg" />
+    <None Include="wwwroot\img\quattrocereali.jpg" />
+    <None Include="wwwroot\img\quattroformaggi.jpg" />
+    <None Include="wwwroot\img\quattrostagioni.jpg" />
+    <None Include="wwwroot\img\salsicciaefriarielli.jpg" />
+    <None Include="wwwroot\img\tartufata.jpg" />
+    <None Include="wwwroot\img\tonnoecipolla.jpg" />
+    <None Include="wwwroot\img\vegetariana.jpg" />
+    <None Include="wwwroot\img\zuccaegorgonzola.jpg" />
+  </ItemGroup>
+
+</Project>
