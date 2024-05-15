@@ -1,10 +1,12 @@
+using la_mia_pizzeria_static.Models;
+
 namespace la_mia_pizzeria_static
 {
     public class Program
     {
         public static void Main(string[] args)
         {
-            var builder = WebApplication.CreateBuilder(args);
+                var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
@@ -28,7 +30,7 @@ namespace la_mia_pizzeria_static
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
+                pattern: "{controller=Pizza}/{action=Index}/{id?}");
 
             app.Run();
         }
