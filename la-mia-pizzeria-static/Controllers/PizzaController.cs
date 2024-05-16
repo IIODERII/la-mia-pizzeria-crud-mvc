@@ -15,25 +15,32 @@ namespace la_mia_pizzeria_static.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            List<Pizza> pizze = new List<Pizza>();
-            using (PizzaContext db = new PizzaContext())
-            {
-                pizze = db.Pizzas.ToList();
-            }
-            pizze = [];  //<= era per verificare che funzionasse in caso non ci fossero pizze
+            List<Pizza> pizze = PizzaManager.GetAllPizzas();
+            //pizze = [];  //<= era per verificare che funzionasse in caso non ci fossero pizze
             return View(pizze);
         }
 
         [HttpGet]
         public IActionResult Show(int id)
         {
-            using (PizzaContext db = new PizzaContext())
-            {
-                Pizza p = db.Pizzas.Where(p => p.Id == id).FirstOrDefault();
+            return View(PizzaManager.GetPizzaById(id));
+        }
 
-                return View(p);
+        [HttpGet]
+        public IActionResult Create() {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Create(Pizza data)
+        {
+            if(!ModelState.IsValid)
+            {
+                return View("Create", data);
             }
 
+            PizzaManager.AddPizza(data);
+            return RedirectToAction("Index");
         }
     }
 }

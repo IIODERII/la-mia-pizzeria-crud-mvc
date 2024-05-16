@@ -4,7 +4,8 @@
 <body style="background-color: #fff3cd">
 <div class="text-center">
     <h1 class="fs-1 pt-5 fw-b text-center pb-3">Pizzeria c#</h1>
-        <h3 style="padding-bottom: 1.5em">dove il tuo codice diventa pizza!</h3>
+    <h3 style="padding-bottom: 1.5em">dove il tuo codice diventa pizza!</h3>
+    <a class="btn btn-warning mb-4" href="@Url.Action("Create", "Pizza")">Crea una pizza</a>
 
     <div class="container">
         <div class="row g-2 pb-5">
@@ -15,7 +16,16 @@
                         <div class="col-12 col-md-6 col-lg-3 px-2">
                             <div class="card w-100 h-100 shadow" style="background-color: #f8d7da">
                                 <div style=" background: radial-gradient(#f8d7da, #fff3cd);">
-                                    <img style="object-fit: contain; object-position: center center" src="~/img/@p.Image" class="card-img-top w-100 h-100" alt="@p.Name">
+                                    
+                                    @if (!p.Image.StartsWith("https://"))
+                                    {
+                                        <img style="object-fit: contain; object-position: center center" src="~/img/@p.Image" class="card-img-top w-100 h-100" alt="@p.Name">
+                                    }
+                                    else
+                                    {
+                                        <img style="object-fit: contain; object-position: center center" src="@p.Image" class="card-img-top w-100 h-100" alt="@p.Name">
+                                    }
+
                                 </div>
                                 <div class="card-body">
                                     <h5 class="card-title">@p.Name</h5>
