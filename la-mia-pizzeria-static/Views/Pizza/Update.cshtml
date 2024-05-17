@@ -1,0 +1,36 @@
+﻿@model Pizza
+<body style="background-color: #fff3cd">
+    <div class="text-center container my-5 rounded-3 shadow-lg" style="background-color: #f8d7da">
+        <a class="text-black fs-1 w-100 d-block pt-4 ms-3 text-start" href="/"><i class="fa-solid fa-arrow-left"></i></a>
+        <h1>Aggiungi i dati della nuova pizza</h1>
+        <div class="text-center container rounded-3 d-flex justify-content-center align-items-center" style=" min-height: 70vh">
+
+            <form asp-controller="Pizza" asp-route-id="@Model.Id" asp-action="Update" method="post" class="w-100 px-4">
+                @Html.AntiForgeryToken()
+                <div class="py-3">
+                    <strong>Nome:</strong>
+                    <input value="@Model.Name" type="text" asp-for="Name" class="d-block w-75 mx-auto form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <strong>Descrizione:</strong>
+                    <textarea asp-for="Description" class="d-block w-75 mx-auto form-control">@Model.Description</textarea>
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <strong>Prezzo:</strong>
+                    <input value="@Model.Price" type="text" asp-for="Price" class="d-block w-75 mx-auto form-control" />
+                    <span asp-validation-for="Price" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <strong>Immagine (inserire la Url):</strong>
+                    <input value="@Model.Image" type="text" asp-for="Image" class="d-block w-75 mx-auto form-control" />
+                    <span asp-validation-for="Image" class="text-danger"></span>
+                </div>
+                <div class="text-end">
+                    <input type="submit" class="btn btn-small btn-warning mb-3" value="Salva">
+                </div>
+            </form>
+        </div>
+    </div>
+</body>

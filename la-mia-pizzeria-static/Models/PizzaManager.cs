@@ -50,5 +50,43 @@ namespace la_mia_pizzeria_static.Models
                 return maxId + 1;
             }
         }
+
+        public static bool UpdatePizza(Pizza data)
+        {
+            using(var db = new PizzaContext())
+            {
+                Pizza p = db.Pizzas.Where(p => p.Id == data.Id).FirstOrDefault();
+
+                if(p != null)
+                {
+                    p.Name = data.Name;
+                    p.Description = data.Description;
+                    p.Price = data.Price;
+                    p.Image = data.Image;
+
+                    db.SaveChanges();
+                    return true;
+                }
+
+                return false;
+            }
+        }
+
+        public static bool DeletePizzaFromId(int id)
+        {
+            using (PizzaContext db = new PizzaContext())
+            {
+                Pizza toDelete = db.Pizzas.Where(p => p.Id == id).FirstOrDefault();
+
+                if (toDelete != null)
+                {
+                    db.Pizzas.Remove(toDelete);
+                    db.SaveChanges();
+                    return true;
+                }
+
+                return false;
+            }
+        }
     }
 }
