@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using static System.Runtime.InteropServices.JavaScript.JSType;
@@ -19,7 +20,7 @@ namespace la_mia_pizzeria_static.Models
         {
             using (PizzaContext db = new PizzaContext())
             {
-                Pizza p = db.Pizzas.Where(p => p.Id == id).FirstOrDefault();
+                Pizza p = db.Pizzas.Where(p => p.Id == id).Include(t => t.Type).FirstOrDefault();
                 return p;
             }
         }
@@ -28,11 +29,12 @@ namespace la_mia_pizzeria_static.Models
             using (PizzaContext db = new PizzaContext())
             {
                 Pizza p = new Pizza();
-                p.Id = GetUniquePizzaId();
                 p.Name = pizza.Name;
                 p.Description = pizza.Description;
                 p.Image = pizza.Image;
                 p.Price = pizza.Price;
+                p.PizzaType_Id = pizza.PizzaType_Id;
+                p.TypeId = pizza.PizzaType_Id;
 
                 db.Pizzas.Add(p);
                 db.SaveChanges();
@@ -51,11 +53,11 @@ namespace la_mia_pizzeria_static.Models
             }
         }
 
-        public static bool UpdatePizza(Pizza data)
+        public static bool UpdatePizza(Pizza data, int id)
         {
             using(var db = new PizzaContext())
             {
-                Pizza p = db.Pizzas.Where(p => p.Id == data.Id).FirstOrDefault();
+                Pizza p = db.Pizzas.Where(p => p.Id == id).FirstOrDefault();
 
                 if(p != null)
                 {
@@ -63,6 +65,8 @@ namespace la_mia_pizzeria_static.Models
                     p.Description = data.Description;
                     p.Price = data.Price;
                     p.Image = data.Image;
+                    p.PizzaType_Id = data.PizzaType_Id;
+                    p.TypeId = data.PizzaType_Id;
 
                     db.SaveChanges();
                     return true;

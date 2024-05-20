@@ -3,6 +3,11 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace la_mia_pizzeria_static.Models
 {
+    public class PizzaFormModel
+    {
+        public Pizza Pizza { get; set; }
+        public List<PizzaType>? Types { get; set; }
+    }
     public class Max5WordsOfDescription : ValidationAttribute
     {
         protected override ValidationResult? IsValid(object? value, ValidationContext validationContext)
@@ -30,7 +35,11 @@ namespace la_mia_pizzeria_static.Models
         public string Image {  get; set; }
         [Required(ErrorMessage = "Certo, senza prezzo come credi di fare i soldi??")]
         [Range(0.01, 100000000, ErrorMessage = "Fammi capire, tu vuoi vendere una pizza gratis oppure dare dei soldi ai clienti. Mi sa che dovresti cambiare lavoro amico...")]
-        public decimal Price { get; set; }
+        public double Price { get; set; }
+        public int? PizzaType_Id { get; set; }
+
+        public int? TypeId { get; set; }
+        public PizzaType? Type { get; set; }
 
         public Pizza() { }
     }

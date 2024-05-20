@@ -8,6 +8,17 @@
         <p class="text-center pt-3">
             <span class="badge bg-warning">@Model.Price</span>
         </p>
+        <p>
+            <strong>Categoria:</strong>
+            @if (Model.Type != null)
+            {
+                @Model.Type.Name
+            }
+            else
+            {
+                <span>Nessuna categoria</span>
+            }
+        </p>
         <p class="pb-3">@Model.Description</p>
     </div>
 </body>
