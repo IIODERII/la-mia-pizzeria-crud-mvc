@@ -19,6 +19,22 @@
                 <span>Nessuna categoria</span>
             }
         </p>
+        <p>
+            <strong>Ingredienti:</strong>
+            @if(Model.Ingredients.Count == 0)
+            {
+                <span>Nessun Ingrediente</span>
+            }
+            else
+            {
+                <ul>
+                    @foreach(Ingredient i in Model.Ingredients)
+                    {
+                        <li>@i.Name</li>
+                    }
+                </ul>
+            }
+        </p>
         <p class="pb-3">@Model.Description</p>
     </div>
 </body>

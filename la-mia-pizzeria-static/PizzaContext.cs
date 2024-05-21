@@ -9,6 +9,7 @@ namespace la_mia_pizzeria_static
     {
         public DbSet<Pizza> Pizzas { get; set; }
         public DbSet<PizzaType> PizzaTypes { get; set; }
+        public DbSet<Ingredient> Ingredients {  get; set; } 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer("Data Source=localhost;Initial Catalog=DBpizza;" +

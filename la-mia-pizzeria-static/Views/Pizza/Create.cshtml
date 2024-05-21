@@ -29,10 +29,10 @@
                 </div>
                 <div class="mb-3">
                     <strong>Categoria Pizza:</strong>
-                    <select asp-for="Pizza.PizzaType_Id" rows="10" class="d-block w-75 mx-auto form-select">
+                    <select asp-for="Pizza.TypeId" rows="10" class="d-block w-75 mx-auto form-select">
                         <option value="@null">Nessuno</option>
                         @foreach(PizzaType t in Model.Types) {
-                            @if (Model.Pizza.PizzaType_Id == t.Id) {
+                            @if (Model.Pizza.TypeId == t.Id) {
                             <option value="@t.Id" selected>@t.Name</option>
                             }
                             else {
@@ -40,6 +40,11 @@
                             }
                         }
                     </select>
+                </div>
+
+                <div class="mb-3">
+                    <strong>Ingredienti:</strong>
+                    <select asp-items="@Model.Ingredients" multiple="multiple" asp-for="SelectedIngredients" size="10" class="d-block w-75 mx-auto form-select"></select>
                 </div>
                 <div class="text-end">
                     <input type="submit" class="btn btn-small btn-warning mb-3" value="Salva">

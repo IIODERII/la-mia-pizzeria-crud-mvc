@@ -1,4 +1,20 @@
 ﻿@model PizzaFormModel
+@{
+    List<bool> isPresent = new List<bool>();
+    foreach (var m in Model.Ingredients)
+    {
+        bool found = false;
+        foreach (Ingredient i in Model.Pizza.Ingredients)
+        {
+            
+            if (int.Parse(m.Value) == i.Id)
+                found = true;
+
+           
+        }
+        isPresent.Add(found ? true : false);
+    }
+}
 <body style="background-color: #fff3cd">
     <div class="text-center container my-5 rounded-3 shadow-lg" style="background-color: #f8d7da">
         <a class="text-black fs-1 w-100 d-block pt-4 ms-3 text-start" href="/"><i class="fa-solid fa-arrow-left"></i></a>
@@ -29,17 +45,36 @@
                 </div>
                 <div class="mb-3">
                     <strong>Categoria:</strong>
-                    <select asp-for="Pizza.PizzaType_Id" rows="10" class="d-block w-75 form-select mx-auto">
+                    <select asp-for="Pizza.TypeId" rows="10" class="d-block w-75 form-select mx-auto">
                         <option value="">Nessuna</option>
                         @foreach (PizzaType type in Model.Types)
                         {
-                            @if (Model.Pizza.PizzaType_Id == type.Id)
+                            @if (Model.Pizza.TypeId == type.Id)
                             {
                                 <option value="@type.Id" selected>@type.Name</option>
                             }
                             else
                             {
                                 <option value="@type.Id">@type.Name</option>
+                            }
+                        }
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <strong>Ingredienti:</strong>
+                    <select asp-for="SelectedIngredients"
+                            multiple="multiple"
+                            size="10"
+                            class="form-control mb-2 mr-sm-2 ml-sm-3 leftList">
+                        @for(int i = 0; i < Model.Ingredients.Count; i++)
+                        {
+                            @if (isPresent[i])
+                            {
+                                <option selected value="@Model.Ingredients[i].Value">@Model.Ingredients[i].Text</option>
+                            }
+                            else
+                            {
+                                <option value="@Model.Ingredients[i].Value">@Model.Ingredients[i].Text</option>
                             }
                         }
                     </select>

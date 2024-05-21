@@ -2,6 +2,8 @@ using Humanizer;
 using la_mia_pizzeria_static.Models;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.Blazor;
+using System.Runtime.ConstrainedExecution;
+using System;
 using static System.Net.Mime.MediaTypeNames;
 
 namespace la_mia_pizzeria_static
@@ -10,7 +12,6 @@ namespace la_mia_pizzeria_static
     {
         public static void Main(string[] args)
         {
-
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.

@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace la_mia_pizzeria_static.Models
@@ -7,6 +8,9 @@ namespace la_mia_pizzeria_static.Models
     {
         public Pizza Pizza { get; set; }
         public List<PizzaType>? Types { get; set; }
+
+        public List<SelectListItem>? Ingredients { get; set; }
+        public List<string>? SelectedIngredients { get; set; }
     }
     public class Max5WordsOfDescription : ValidationAttribute
     {
@@ -36,10 +40,12 @@ namespace la_mia_pizzeria_static.Models
         [Required(ErrorMessage = "Certo, senza prezzo come credi di fare i soldi??")]
         [Range(0.01, 100000000, ErrorMessage = "Fammi capire, tu vuoi vendere una pizza gratis oppure dare dei soldi ai clienti. Mi sa che dovresti cambiare lavoro amico...")]
         public double Price { get; set; }
-        public int? PizzaType_Id { get; set; }
+
 
         public int? TypeId { get; set; }
         public PizzaType? Type { get; set; }
+
+        public List<Ingredient>? Ingredients { get; set; }
 
         public Pizza() { }
     }

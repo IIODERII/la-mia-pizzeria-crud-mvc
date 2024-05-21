@@ -20,7 +20,7 @@ namespace la_mia_pizzeria_static.Models
         {
             using (PizzaContext db = new PizzaContext())
             {
-                Pizza p = db.Pizzas.Where(p => p.Id == id).Include(t => t.Type).FirstOrDefault();
+                Pizza p = db.Pizzas.Where(p => p.Id == id).Include(t => t.Type).Include(i => i.Ingredients).FirstOrDefault();
                 return p;
             }
         }
@@ -33,8 +33,8 @@ namespace la_mia_pizzeria_static.Models
                 p.Description = pizza.Description;
                 p.Image = pizza.Image;
                 p.Price = pizza.Price;
-                p.PizzaType_Id = pizza.PizzaType_Id;
-                p.TypeId = pizza.PizzaType_Id;
+                p.TypeId = pizza.TypeId ;
+                p.Ingredients = pizza.Ingredients;
 
                 db.Pizzas.Add(p);
                 db.SaveChanges();
@@ -53,11 +53,11 @@ namespace la_mia_pizzeria_static.Models
             }
         }
 
-        public static bool UpdatePizza(Pizza data, int id)
+        public static bool UpdatePizza(Pizza data, int id, List<string> ingredients)
         {
             using(var db = new PizzaContext())
             {
-                Pizza p = db.Pizzas.Where(p => p.Id == id).FirstOrDefault();
+                Pizza p = db.Pizzas.Where(p => p.Id == id).Include(i => i.Ingredients).FirstOrDefault();
 
                 if(p != null)
                 {
@@ -65,8 +65,18 @@ namespace la_mia_pizzeria_static.Models
                     p.Description = data.Description;
                     p.Price = data.Price;
                     p.Image = data.Image;
-                    p.PizzaType_Id = data.PizzaType_Id;
-                    p.TypeId = data.PizzaType_Id;
+                    p.TypeId = data.TypeId;
+
+                    p.Ingredients.Clear();
+                    if(ingredients != null)
+                    {
+                        foreach(var ingId in  ingredients)
+                        {
+                            int selectedId = int.Parse(ingId);
+                            Ingredient newIng = db.Ingredients.Where(i => i.Id == selectedId).FirstOrDefault();
+                            p.Ingredients.Add(newIng);
+                        }
+                    }
 
                     db.SaveChanges();
                     return true;
