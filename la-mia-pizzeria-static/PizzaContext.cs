@@ -1,11 +1,13 @@
 ﻿using la_mia_pizzeria_static.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.ViewEngines;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 
 namespace la_mia_pizzeria_static
 {
-    public class PizzaContext : DbContext
+    public class PizzaContext : IdentityDbContext<IdentityUser>
     {
         public DbSet<Pizza> Pizzas { get; set; }
         public DbSet<PizzaType> PizzaTypes { get; set; }
@@ -16,4 +18,5 @@ namespace la_mia_pizzeria_static
             "Integrated Security=True;TrustServerCertificate=True");
         }
     }
+    
 }

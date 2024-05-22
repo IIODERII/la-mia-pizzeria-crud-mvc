@@ -5,7 +5,10 @@
 <div class="text-center">
     <h1 class="fs-1 pt-5 fw-b text-center pb-3">Pizzeria c#</h1>
     <h3 style="padding-bottom: 1.5em">dove il tuo codice diventa pizza!</h3>
+    @if (User.IsInRole("ADMIN"))
+                                        {
     <a class="btn btn-warning mb-4" href="@Url.Action("Create", "Pizza")">Crea una pizza</a>
+                                        }
 
     <div class="container">
         <div class="row g-2 pb-5">
@@ -35,10 +38,14 @@
                                     </div>
                                     <div class="d-flex justify-content-center align-items-center pt-3">
                                         <a class="btn btn-success" href="@Url.Action("Show", "Pizza", new { id = p.Id })"><i class="fa-solid fa-eye"></i></a>
-                                        <a class="btn btn-primary mx-4" href="@Url.Action("Update", "Pizza", new { id = p.Id })"><i class="fa-solid fa-pencil"></i></a>
-
-                                        <button data-bs-toggle="modal" data-bs-target="#DeleteModal-@p.Id" class="btn btn-danger"><i class="fa-solid fa-trash"></i></button>
-                                    </div>
+                                        @if(User.IsInRole("ADMIN")){
+                                            <a class="btn btn-primary mx-4" href="@Url.Action("Update", "Pizza", new { id = p.Id })"><i class="fa-solid fa-pencil"></i></a>
+                                        }
+                                        @if (User.IsInRole("ADMIN"))
+                                        {
+                                            <button data-bs-toggle="modal" data-bs-target="#DeleteModal-@p.Id" class="btn btn-danger"><i class="fa-solid fa-trash"></i></button>
+                                        }
+                                        </div>
                                     <div class="modal fade" id="DeleteModal-@p.Id" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                         <div class="modal-dialog" style="background-color: #fff3cd">
                                             <div class="modal-content" style="background-color: #fff3cd">

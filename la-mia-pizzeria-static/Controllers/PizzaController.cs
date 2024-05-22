@@ -9,6 +9,7 @@ using la_mia_pizzeria_static;
 using la_mia_pizzeria_static.Models;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 using System.Composition;
+using Microsoft.AspNetCore.Authorization;
 
 namespace la_mia_pizzeria_static.Controllers
 {
@@ -28,6 +29,7 @@ namespace la_mia_pizzeria_static.Controllers
             return View(PizzaManager.GetPizzaById(id));
         }
 
+        //[Authorize(Roles = "ADMIN")]
         [HttpGet]
         public IActionResult Create()
         {
@@ -56,7 +58,7 @@ namespace la_mia_pizzeria_static.Controllers
             }
 
         }
-
+        [Authorize(Roles = "ADMIN")]
         [HttpPost]
         public IActionResult Create(PizzaFormModel data)
         {
@@ -105,6 +107,7 @@ namespace la_mia_pizzeria_static.Controllers
             return RedirectToAction("Index");
         }
 
+        [Authorize(Roles = "ADMIN")]
         [HttpGet]
         public IActionResult Update(int id) {
             using (PizzaContext db = new PizzaContext())
@@ -139,7 +142,7 @@ namespace la_mia_pizzeria_static.Controllers
                 }
             }
         }
-
+        [Authorize(Roles = "ADMIN")]
         [HttpPost]
         public IActionResult Update(int id, PizzaFormModel data)
         {
@@ -171,6 +174,7 @@ namespace la_mia_pizzeria_static.Controllers
             return NotFound();
         }
 
+        [Authorize(Roles = "ADMIN")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Delete(int id)
